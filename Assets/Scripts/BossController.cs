@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
     private EnemyHealth health;
     private BossShooting shooting;
+
+    [SerializeField] private GameObject explosionPrfb;
 
     [Header("Movimiento")]
     [SerializeField] private float entrySpeed = 3f;
@@ -77,4 +80,35 @@ public class BossController : MonoBehaviour
 
         transform.position = pos;
     }
+
+    public void OnBossDeath()
+    {
+        StartCoroutine(DeathRoutine());
+    }
+
+    IEnumerator DeathRoutine()
+    {
+        
+        shooting.enabled = false;
+
+        
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 randomOffset = Random.insideUnitCircle * 1.5f;
+            Instantiate(explosionPrfb, transform.position + randomOffset, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        
+        Instantiate(explosionPrfb, transform.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(1f);
+
+        
+        GameManager.Instance.Victory();
+
+        Destroy(gameObject);
+    }
+
 }

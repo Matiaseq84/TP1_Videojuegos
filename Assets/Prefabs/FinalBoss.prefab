@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea0dfe6b1597584b8cda5de734016f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  explosionPrfb: {fileID: 8609624898456696202, guid: 61433abd33d809a42ade6fbf1bbbb062, type: 3}
   entrySpeed: 3
   targetY: 20
   moveAmplitude: 3

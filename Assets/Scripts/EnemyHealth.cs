@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -31,11 +31,18 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+ 
         if (CompareTag("Boss"))
         {
-            GameManager.Instance.Victory();
+            BossController boss = GetComponent<BossController>();
+            if (boss != null)
+            {
+                boss.OnBossDeath();
+                return; 
+            }
         }
 
         Destroy(gameObject);
+
     }
 }
